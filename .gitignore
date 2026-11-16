@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# PyInstaller build output (created by build_exe.bat)
+build/
+dist/
+*.spec
+
+# ffmpeg binaries: large, and distributed under their own licence.
+# Users download them; the GitHub Actions workflow fetches them at build time.
+ffmpeg.exe
+ffprobe.exe
+ffmpeg/
+
+# Book Ninja working files
+*.partial
+.bookninja-progress-*.json
+
+# Audiobooks and test output
+*.m4b
+*.m4a
+*.aax
+Split/
+
+# OS / editor clutter
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

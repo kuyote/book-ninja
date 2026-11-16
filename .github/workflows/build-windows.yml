@@ -1,0 +1,30 @@
+# Push this repo to GitHub and this builds a ready-to-run Windows zip
+# (app + ffmpeg) under the Actions tab -> latest run -> Artifacts.
+name: Build Windows app
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Get ffmpeg
+        shell: pwsh
+        run: |
+          Invoke-WebRequest https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip -OutFile ff.zip
+          Expand-Archive ff.zip -DestinationPath ff
+          Copy-Item (Get-ChildItem ff -Recurse -Filter ffmpeg.exe).FullName .
+          Copy-Item (Get-ChildItem ff -Recurse -Filter ffprobe.exe).FullName .
+      - name: Build
+        shell: pwsh
+        run: |
+          pip install pyinstaller
+          pyinstaller --noconfirm --windowed --name "Book Ninja" book_ninja.pyw
+          pyinstaller --noconfirm --console --name bookninja bookninja_cli.py
+          Copy-Item dist/bookninja/bookninja.exe "dist/Book Ninja/"
+          Copy-Item ffmpeg.exe, ffprobe.exe "dist/Book Ninja/"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Book-Ninja-windows
+          path: dist/Book Ninja
