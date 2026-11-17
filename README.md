@@ -1,6 +1,9 @@
 # book-ninja
 UI for slicing and dicing m4b audio books
 
+<img width="1037" height="907" alt="image" src="https://github.com/user-attachments/assets/f882dd72-202b-4b62-8eaf-69357b3e9086" />
+
+
 Splits long `.m4b` audiobooks into smaller `.m4b` files that older iPods can handle. It only cuts **at chapter boundaries**, and each part keeps its own chapter list, the book's tags and the cover art.
 
 Add as many books as you like. They're split **one at a time**, and each book goes into **its own folder** under a base folder you choose. Folder and file names come from templates that can use pieces of the original file name.
